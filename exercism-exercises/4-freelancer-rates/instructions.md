@@ -6,7 +6,7 @@ A client contacts the freelancer to enquire about their rates. The freelancer ex
 ```js
 dayRate(89);
 // => 712
-The day rate does not need to be rounded or changed to a "fixed" precision.
+The day rate does not need to be rounded or changed to a 'fixed' precision.
 ```
 
 ## Task 2 Calculate the number of workdays given a fixed budget
