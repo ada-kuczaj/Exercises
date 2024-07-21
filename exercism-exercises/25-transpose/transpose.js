@@ -1,4 +1,4 @@
-//1. Determine the elements with maximum length 
+// Function to find the longest element in the array
 function findLongestElement(input) {
     if (input.length === 0) {
         return null;
@@ -15,32 +15,60 @@ function findLongestElement(input) {
     return longestElement.length;
 }
 
-//2.Pad the rows to the left with spaces to ensure they all have the same length
-function padLeftToLength(word, length) {
+// Function to pad the rows to the right with spaces to ensure they all have the same length
+function padRightToLength(word, length) {
     const padding = ' '.repeat(length - word.length);
-    return padding + word;
+    return word + padding;
+}
+
+// Function to transpose the matrix of strings
+function transpose(matrix) {
+    const maxLength = findLongestElement(matrix);
+    const paddedMatrix = matrix.map(word => padRightToLength(word, maxLength));
+    
+    const transposed = [];
+    for (let i = 0; i < maxLength; i++) {
+        let row = '';
+        for (let j = 0; j < paddedMatrix.length; j++) {
+            row += paddedMatrix[j][i];
+        }
+        transposed.push(row);
+    }
+
+    // Trim trailing spaces in each row of the transposed output
+    return transposed.map(row => row.replace(/\s+$/, ''));
 }
 
 
-// // Function to transpose the matrix of strings
-// function transpose(array) {
-//     const maxLength = findLongestElement(matrix);
-//     const paddedMatrix = matrix.map(word => padLeftToLength(word, maxLength));
-    
-//     const transposed = [];
-//     for (let i = 0; i < maxLength; i++) {
-//         let row = '';
-//         for (let j = 0; j < paddedMatrix.length; j++) {
-//             row += paddedMatrix[j][i];
+// function transpose(input) {
+//     // Step 1: Determine the length of the longest row
+//     let maxLength = 0;
+//     for (const row of input) {
+//         if (row.length > maxLength) {
+//             maxLength = row.length;
 //         }
-//         transposed.push(row);
 //     }
 
-//     return transposed;
+//     // Step 2: Pad all rows to the length of the longest row by adding spaces to the end
+//     const paddedRows = input.map(row => row.padEnd(maxLength, ' '));
+
+//     // Step 3: Transpose the matrix
+//     const result = [];
+//     for (let col = 0; col < maxLength; col++) {
+//         let newRow = '';
+//         for (let row = 0; row < paddedRows.length; row++) {
+//             newRow += paddedRows[row][col];
+//         }
+//         // Push the new row without trimming the trailing spaces
+//         result.push(newRow);
+//     }
+
+//     return result;
 // }
+
 
 module.exports = {
     findLongestElement,
-    padLeftToLength,
+    padRightToLength,
     transpose
 }
